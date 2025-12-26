@@ -1,38 +1,32 @@
 import { useEffect, useState } from "react"
 
-type progreebarProps = {
+type progressProps  = {
   progress:number
 }
 const App = () => {
   const bars = [0, 15, 30, 45, 60, 75, 90, 100]
   return (
-    <div>
-      <h1 className="text-xl font-semibold text-center p-2">Progress Bars</h1>
-      <div className="flex flex-col gap-3">
-        {bars.map((item)=><Progressbar key={item} progress ={item}/>)}
+    <div className="bg-black h-screen">
+      <h1 className="text-white text-center text-xl font-semibold p-2">Progress Bar</h1>
+      <div>{bars.map((item)=><ProgressBar progress={item} key ={item}/>)}
       </div>
     </div>
   )
 }
 
-const Progressbar = ({progress} : progreebarProps) =>{
+const ProgressBar = ({progress}:progressProps) =>{
+ const [animatedProgress, setAnimtedProgress] = useState(0)
+useEffect(()=>{
+  setTimeout(()=>setAnimtedProgress(progress), 300)
+}, [progress])
 
-  const [animatedProgress, setAnimatedProgress] = useState(0)
- 
-
-  useEffect(()=>{
-    setTimeout(()=> setAnimatedProgress(progress), 300)
-  }, [progress])
-
-  return(
-    <div className="border-2 overflow-hidden rounded-full">
-      <div role="progressbar" aria-valuenow={progress} aria-valuemax={100} aria-valuemin={0}  className="bg-green-500 duration-300 ease-in-out text-right" 
-      style={{
-        // width:`${progress}%`,
-        transform:`translateX(${animatedProgress - 100}%)`,
-       color: `${animatedProgress > 5 ? "white" :"black"}`}}>{animatedProgress}%</div>
-    </div>
-  )
-}
-
+ return (
+   <div className="border m-3 rounded-full overflow-hidden">
+    <div className="text-white bg-green-400 text-right transition-all duration-200 ease-in"  role="progressbar" aria-valuemax={100} aria-valuemin={0} aria-valuenow={animatedProgress}
+    style={{
+      color :`${animatedProgress > 5 ? "white" : "black"}`,
+      transform:`translateX(${animatedProgress - 100}%)`
+      }}>{animatedProgress}%</div>
+  </div>
+ )}
 export default App
