@@ -26,7 +26,7 @@ const Progressbar = ({progress} : progreebarProps) =>{
 
   return(
     <div className="border-2 overflow-hidden rounded-full">
-      <div role="progressbar" aria-valuenow={animatedProgress} aria-valuemax={100} aria-valuemin={0}  className="bg-green-500 duration-300 ease-in-out " 
+      <div role="progressbar" aria-valuenow={progress} aria-valuemax={100} aria-valuemin={0}  className="bg-green-500 duration-300 ease-in-out text-right" 
       style={{
         // width:`${progress}%`,
         transform:`translateX(${animatedProgress - 100}%)`,
